@@ -1,0 +1,625 @@
+mysql> desc Persons;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| Person_ID | int         | NO   | PRI | NULL    |       |
+| Name      | varchar(50) | NO   |     | NULL    |       |
+| AAdhar    | bigint      | NO   | UNI | NULL    |       |
+| Age       | int         | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> CREATE TABLE Orders(Order_Id PRIMARY KEY,ORDER_Number INT NOT NULL,Person_ID INT FOREIGN KEY(Person_ID) References Persons(Person_ID));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'PRIMARY KEY,ORDER_Number INT NOT NULL,Person_ID INT FOREIGN KEY(Person_ID) Refer' at line 1
+mysql> CREATE TABLE Orders (
+    ->     Order_Id INT PRIMARY KEY,
+    ->     ORDER_Number INT NOT NULL,
+    ->     Person_ID INT,
+    ->     FOREIGN KEY (Person_ID) REFERENCES Persons(Person_ID)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc Orders
+    -> desc Orders;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc Orders' at line 2
+mysql> desc Orders;
++--------------+------+------+-----+---------+-------+
+| Field        | Type | Null | Key | Default | Extra |
++--------------+------+------+-----+---------+-------+
+| Order_Id     | int  | NO   | PRI | NULL    |       |
+| ORDER_Number | int  | NO   |     | NULL    |       |
+| Person_ID    | int  | YES  | MUL | NULL    |       |
++--------------+------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> desc employee
+    -> ;
+ERROR 1146 (42S02): Table 'COLLEGE.employee' doesn't exist
+mysql> CREATE EMPLOYEE(emp_no int(10),emp_name varchar(15),place varchar(15),ph_no int(10),dept_name varchar(15),job_id int(10),salary int(15)_;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'EMPLOYEE(emp_no int(10),emp_name varchar(15),place varchar(15),ph_no int(10),dep' at line 1
+mysql> CREATE EMPLOYEE(emp_no int(10),emp_name varchar(15),place varchar(15),ph_no int(10),dept_name varchar(15),job_id int(10),salary int(15);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'EMPLOYEE(emp_no int(10),emp_name varchar(15),place varchar(15),ph_no int(10),dep' at line 1
+mysql> CREATE TABLE EMPLOYEE(emp_no int(10),emp_name varchar(15),place varchar(15),ph_no int(10),dept_name varchar(15),job_id int(10),salary int(15);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> CREATE TABLE EMPLOYEE(emp_no int(10),emp_name varchar(15),place varchar(15),ph_no int(10),dept_name varchar(15),job_id int(10),salary int(15));
+Query OK, 0 rows affected, 4 warnings (0.04 sec)
+
+mysql> desc EPMLOYEE;
+ERROR 1146 (42S02): Table 'COLLEGE.EPMLOYEE' doesn't exist
+mysql> desc EMPLOYEE;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| emp_no    | int         | YES  |     | NULL    |       |
+| emp_name  | varchar(15) | YES  |     | NULL    |       |
+| place     | varchar(15) | YES  |     | NULL    |       |
+| ph_no     | int         | YES  |     | NULL    |       |
+| dept_name | varchar(15) | YES  |     | NULL    |       |
+| job_id    | int         | YES  |     | NULL    |       |
+| salary    | int         | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> create table Department(dept_no int(20),emp_int(10),emp_name varchar(20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(10),emp_name varchar(20))' at line 1
+mysql> create table Department(dept_no int(20),emp_no int(10),emp_name varchar(20));
+Query OK, 0 rows affected, 2 warnings (0.05 sec)
+
+mysql> desc Department;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| dept_no  | int         | YES  |     | NULL    |       |
+| emp_no   | int         | YES  |     | NULL    |       |
+| emp_name | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table EMPLOYEE add emp_no int PRIMARY KEY;
+ERROR 1060 (42S21): Duplicate column name 'emp_no'
+mysql> desc Department;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| dept_no  | int         | YES  |     | NULL    |       |
+| emp_no   | int         | YES  |     | NULL    |       |
+| emp_name | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table EMPLOYEE add emp_no to int PRIMARY KEY;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'to int PRIMARY KEY' at line 1
+mysql> alter table EMPLOYEE add emp_no int PRIMARY KEY;
+ERROR 1060 (42S21): Duplicate column name 'emp_no'
+mysql>
+mysql> alter table EMPLOYEE add PRIMARY KEY (emp_no);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc Department;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| dept_no  | int         | YES  |     | NULL    |       |
+| emp_no   | int         | YES  |     | NULL    |       |
+| emp_name | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc EMPLOYEE;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| emp_no    | int         | NO   | PRI | NULL    |       |
+| emp_name  | varchar(15) | YES  |     | NULL    |       |
+| place     | varchar(15) | YES  |     | NULL    |       |
+| ph_no     | int         | YES  |     | NULL    |       |
+| dept_name | varchar(15) | YES  |     | NULL    |       |
+| job_id    | int         | YES  |     | NULL    |       |
+| salary    | int         | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> alter table Department add PRIMARY KEY (dept_no);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table EMPLOYEE employee add dept_no int add constraint fk_dept FOREIGN KEY (dept_no) reference Department (dept_no) on Delete Cascade;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'employee add dept_no int add constraint fk_dept FOREIGN KEY (dept_no) reference ' at line 1
+mysql> ^C
+mysql> ALTER TABLE EMPLOYEE ADD dept_no INT, ADD CONSTRAINT fk_dept FOREIGN KEY (dept_no) REFERENCES Department(dept_no) ON DELETE CASCADE;
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc EMPLOYEE;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| emp_no    | int         | NO   | PRI | NULL    |       |
+| emp_name  | varchar(15) | YES  |     | NULL    |       |
+| place     | varchar(15) | YES  |     | NULL    |       |
+| ph_no     | int         | YES  |     | NULL    |       |
+| dept_name | varchar(15) | YES  |     | NULL    |       |
+| job_id    | int         | YES  |     | NULL    |       |
+| salary    | int         | YES  |     | NULL    |       |
+| dept_no   | int         | YES  | MUL | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> alter table orders drop PRIMARY KEY;
+ERROR 1146 (42S02): Table 'COLLEGE.orders' doesn't exist
+mysql> alter table Orders drop PRIMARY KEY;
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc Orders;
++--------------+------+------+-----+---------+-------+
+| Field        | Type | Null | Key | Default | Extra |
++--------------+------+------+-----+---------+-------+
+| Order_Id     | int  | NO   |     | NULL    |       |
+| ORDER_Number | int  | NO   |     | NULL    |       |
+| Person_ID    | int  | YES  | MUL | NULL    |       |
++--------------+------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into Department values(10,'HR');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into EMPLOYEE values(101,'Rahul',Delhi',7845123654,'Manager',1,50000);
+    '>
+    '> insert into EMPLOYEE values(101,'Alan',Ke',7845123654,'Manager',1,50000);
+[1]+  Stopped                 sudo mysql
+mca@mca-HP-Pro-Tower-280-G9-E-PCI-Desktop-PC:~$ sudo mysql
+[sudo] password for mca:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.0.44-0ubuntu0.22.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2025, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> INSERT INTO EMPLOYEE
+    -> VALUES (102, 'Anita', 'Mumbai', 1234567, 'HR', 2, 45000);
+ERROR 1046 (3D000): No database selected
+mysql> USE COLLEGE
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> insert into EMPLOYEE values(101,'Alan','Kerala',8012457896,'HR',2,45000);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into EMPLOYEE values(1,'Alan','Kerala',8012457896,'HR',2,45000);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into EMPLOYEE values(1,'Alan','Kerala',8012457896,'HR',2,45000,23);
+ERROR 1264 (22003): Out of range value for column 'ph_no' at row 1
+mysql> alter table EMPLOYEE modify ph_no int(20);
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> insert into EMPLOYEE values(1,'Alan','Kerala',8012457896,'HR',2,45000,23);
+ERROR 1264 (22003): Out of range value for column 'ph_no' at row 1
+mysql> insert into EMPLOYEE values(1,'Alan','Kerala',123456,'HR',2,45000,23);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`COLLEGE`.`EMPLOYEE`, CONSTRAINT `fk_dept` FOREIGN KEY (`dept_no`) REFERENCES `Department` (`dept_no`) ON DELETE CASCADE)
+mysql> alter table EMPLOYEE modify ph_no varchar(20);
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into EMPLOYEE values(1,'Alan','Kerala',8012457896,'HR',2,45000,23);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`COLLEGE`.`EMPLOYEE`, CONSTRAINT `fk_dept` FOREIGN KEY (`dept_no`) REFERENCES `Department` (`dept_no`) ON DELETE CASCADE)
+mysql> alter table EMPLOYEE modify ph_no bigint(50);
+Query OK, 0 rows affected, 1 warning (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> insert into EMPLOYEE values(1,'Alan','Kerala',8012457896,'HR',2,45000,23);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`COLLEGE`.`EMPLOYEE`, CONSTRAINT `fk_dept` FOREIGN KEY (`dept_no`) REFERENCES `Department` (`dept_no`) ON DELETE CASCADE)
+mysql> ^C
+mysql> Insert into Department values (23,'HR');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> Insert into Department (dept_no,dept_name) values 23,'HR';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '23,'HR'' at line 1
+mysql> desc Department;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| dept_no  | int         | NO   | PRI | NULL    |       |
+| emp_no   | int         | YES  |     | NULL    |       |
+| emp_name | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> alter table Department rename column emp_name to dept_name;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table EMPLOYEE drop job_id;
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table EMPLOYEE drop place;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table EMPLOYEE drop dept_name;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc EMPLOYEE;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| emp_no   | int         | NO   | PRI | NULL    |       |
+| emp_name | varchar(15) | YES  |     | NULL    |       |
+| ph_no    | bigint      | YES  |     | NULL    |       |
+| salary   | int         | YES  |     | NULL    |       |
+| dept_no  | int         | YES  | MUL | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> ^C
+mysql> INSERT INTO Department (dept_no, emp_no, emp_name) VALUES
+    -> (10, 201, 'Manager A'),
+    -> (20, 202, 'Manager B'),
+    -> (30, 203, 'Manager C'),
+    -> (40, 204, 'Manager D'),
+    -> (50, 205, 'Manager E'),
+    -> (60, 206, 'Manager F'),
+    -> (70, 207, 'Manager G'),
+    -> (80, 208, 'Manager H'),
+    -> (90, 209, 'Manager I'),
+    -> (100, 210, 'Manager J');
+ERROR 1054 (42S22): Unknown column 'emp_name' in 'field list'
+mysql> desc Department;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| dept_no   | int         | NO   | PRI | NULL    |       |
+| emp_no    | int         | YES  |     | NULL    |       |
+| dept_name | varchar(20) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO Department (dept_no, emp_no, dept_name) VALUES
+    -> (10, 1001, 'HR'),
+    -> (20, 1002, 'Finance'),
+    -> (30, 1003, 'IT'),
+    -> (40, 1004, 'Sales'),
+    -> (50, 1005, 'Marketing'),
+    -> (60, 1006, 'Admin'),
+    -> (70, 1007, 'Support'),
+    -> (80, 1008, 'R&D'),
+    -> (90, 1009, 'Operations'),
+    -> (100, 1010, 'Logistics');
+Query OK, 10 rows affected (0.01 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select * from EMPLOYEE;
+Empty set (0.00 sec)
+
+mysql> select * from Department;
++---------+--------+------------+
+| dept_no | emp_no | dept_name  |
++---------+--------+------------+
+|      10 |   1001 | HR         |
+|      20 |   1002 | Finance    |
+|      30 |   1003 | IT         |
+|      40 |   1004 | Sales      |
+|      50 |   1005 | Marketing  |
+|      60 |   1006 | Admin      |
+|      70 |   1007 | Support    |
+|      80 |   1008 | R&D        |
+|      90 |   1009 | Operations |
+|     100 |   1010 | Logistics  |
++---------+--------+------------+
+10 rows in set (0.00 sec)
+
+mysql> alter table Department emp_no;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'emp_no' at line 1
+mysql> alter table Department drop emp_no;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table Department drop dept_name;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from Department;
++---------+
+| dept_no |
++---------+
+|      10 |
+|      20 |
+|      30 |
+|      40 |
+|      50 |
+|      60 |
+|      70 |
+|      80 |
+|      90 |
+|     100 |
++---------+
+10 rows in set (0.00 sec)
+
+mysql> alter table EMPLOYEE add designation varchar(20);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc Department;
++---------+------+------+-----+---------+-------+
+| Field   | Type | Null | Key | Default | Extra |
++---------+------+------+-----+---------+-------+
+| dept_no | int  | NO   | PRI | NULL    |       |
++---------+------+------+-----+---------+-------+
+1 row in set (0.00 sec)
+
+mysql> desc EMPLOYEE;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| emp_no      | int         | NO   | PRI | NULL    |       |
+| emp_name    | varchar(15) | YES  |     | NULL    |       |
+| ph_no       | bigint      | YES  |     | NULL    |       |
+| salary      | int         | YES  |     | NULL    |       |
+| dept_no     | int         | YES  | MUL | NULL    |       |
+| designation | varchar(20) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE (emp_no, emp_name, ph_no, salary, dept_no, designation) VALUES
+    -> (1, 'Alan', 8012457896, 45000, 10, 'Manager'),
+    -> (2, 'Brian', 8123456789, 48000, 20, 'Accountant'),
+    -> (3, 'Cathy', 8234567890, 52000, 30, 'Developer'),
+    -> (4, 'David', 8345678901, 60000, 40, 'Sales Executive'),
+    -> (5, 'Eva', 8456789012, 55000, 50, 'Marketing Lead'),
+    -> (6, 'Frank', 8567890123, 47000, 60, 'Admin Officer'),
+    -> (7, 'Grace', 8678901234, 70, 'Support Engineer'),
+    -> (8, 'Helen', 8789012345, 80, 'Research Analyst'),
+    -> (9, 'Ian', 8890123456, 90, 'Operations Manager'),
+    -> (10, 'Jane', 8901234567, 100, 'Logistics Coordinator');
+ERROR 1136 (21S01): Column count doesn't match value count at row 7
+mysql> INSERT INTO EMPLOYEE (emp_no, emp_name, ph_no, salary, dept_no, designation) VALUES
+    -> (1, 'Alan', 8012457896, 45000, 10, 'Manager'),
+    -> (2, 'Brian', 8123456789, 48000, 20, 'Accountant'),
+    -> (3, 'Cathy', 8234567890, 52000, 30, 'Developer'),
+    -> (4, 'David', 8345678901, 60000, 40, 'Sales Executive'),
+    -> (5, 'Eva', 8456789012, 55000, 50, 'Marketing Lead'),
+    -> (6, 'Frank', 8567890123, 47000, 60, 'Admin Officer'),
+    -> (7, 'Grace', 8678901234, 70, 'Support Engineer'),
+    -> (8, 'Helen', 8789012345, 80, 'Research Analyst'),
+    -> (9, 'Ian', 8890123456, 90, 'Operations Manager'),
+    -> (10, 'Jane', 8901234567, 100, 'Logistics Coordinator');
+ERROR 1136 (21S01): Column count doesn't match value count at row 7
+mysql> INSERT INTO EMPLOYEE (emp_no, emp_name, ph_no, salary, dept_no, designation) VALUES
+    -> (1, 'Alan', 8012457896, 45000, 10, 'Manager'),
+    -> (2, 'Brian', 8123456789, 48000, 20, 'Accountant'),
+    -> (3, 'Cathy', 8234567890, 52000, 30, 'Developer'),
+    -> (4, 'David', 8345678901, 60000, 40, 'Sales Executive'),
+    -> (5, 'Eva', 8456789012, 55000, 50, 'Marketing Lead'),
+    -> (6, 'Frank', 8567890123, 47000, 60, 'Admin Officer'),
+    -> (7, 'Grace', 8678901234, 70, 50000, 'Support Engineer'),
+    -> (8, 'Helen', 8789012345, 80, 62000, 'Research Analyst'),
+    -> (9, 'Ian', 8890123456, 90, 58000, 'Operations Manager'),
+    -> (10, 'Jane', 8901234567, 100, 65000, 'Logistics Coordinator');
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`COLLEGE`.`EMPLOYEE`, CONSTRAINT `fk_dept` FOREIGN KEY (`dept_no`) REFERENCES `Department` (`dept_no`) ON DELETE CASCADE)
+mysql> insert into EMPLOYEE (emp_no,emp_name,ph_no,salary,dept_no,designation) values
+    -> (1,'Alan',8754682145,45000,10,'Manager'),
+    -> (2,'Sestin',5487985412,50000,80,'HR'),
+    -> (3,'Reny',8754120354,30000,70,,Support Engineer'),
+    '> (4,'V.Arun',9875461245,60000,20,'Operations Manager'),
+    '> (5,Titus,9854652134,654020,10,'Logistics Coordinator),
+    -> (6,'R.Sidarth',8798456785,40,'Research Analyst'),
+    -> (7,'Abhijith',6545787845,50,'Developer'),
+    -> (8,'Melbin',6598784512,60,'Accountant'),
+    -> (9,'Agnel',4578541245,120002,90,'Sales Executive'),
+    -> (10,Akshay,8078573465,165544,100,'Admin Officer);
+    '>
+    '> (10,Akshay,8078573465,165544,100,'Admin Officer);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',Support Engineer'),
+(4,'V.Arun',9875461245,60000,20,'Operations Manager'),
+(5,T' at line 4
+mysql> INSERT INTO EMPLOYEE (emp_no, emp_name, ph_no, salary, dept_no, designation) VALUES
+    -> (1, 'Alan', 8012457896, 45000, 10, 'Manager'),
+    -> (2, 'Brian', 8123456789, 48000, 20, 'Accountant'),
+    -> (3, 'Cathy', 8234567890, 52000, 30, 'Developer'),
+    -> (4, 'David', 8345678901, 60000, 40, 'Sales Executive'),
+    -> (5, 'Eva', 8456789012, 55000, 50, 'Marketing Lead'),
+    -> (6, 'Frank', 8567890123, 47000, 60, 'Admin Officer'),
+    -> (7, 'Grace', 8678901234, 70, 50000, 'Support Engineer'),
+    -> (8, 'Helen', 8789012345, 80, 62000, 'Research Analyst'),
+    -> (9, 'Ian', 8890123456, 90, 58000, 'Operations Manager'),
+    -> (10, 'Jane', 8901234567, 100, 65000, 'Logistics Coordinator');
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`COLLEGE`.`EMPLOYEE`, CONSTRAINT `fk_dept` FOREIGN KEY (`dept_no`) REFERENCES `Department` (`dept_no`) ON DELETE CASCADE)
+mysql> INSERT INTO EMPLOYEE (emp_no, emp_name, ph_no, salary, dept_no, designation) VALUES
+    -> (1, 'Alan', 8012457896, 45000, 10, 'Manager'),
+    -> (2, 'Brian', 8123456789, 48000, 20, 'Accountant'),
+    -> (3, 'Cathy', 8234567890, 52000, 30, 'Developer'),
+    -> (4, 'David', 8345678901, 60000, 40, 'Sales Executive'),
+    -> (5, 'Eva', 8456789012, 55000, 50, 'Marketing Lead'),
+    -> (6, 'Frank', 8567890123, 47000, 60, 'Admin Officer'),
+    -> (7, 'Grace', 8678901234, 70, 50000, 'Support Engineer'),
+    -> (8, 'Helen', 8789012345, 80, 62000, 'Research Analyst'),
+    -> (9, 'Ian', 8890123456, 90, 58000, 'Operations Manager'),
+    -> (10, 'Jane', 8901234567, 100, 65000, 'Logistics Coordinator');
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`COLLEGE`.`EMPLOYEE`, CONSTRAINT `fk_dept` FOREIGN KEY (`dept_no`) REFERENCES `Department` (`dept_no`) ON DELETE CASCADE)
+mysql> desc EMPLOYEE;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| emp_no      | int         | NO   | PRI | NULL    |       |
+| emp_name    | varchar(15) | YES  |     | NULL    |       |
+| ph_no       | bigint      | YES  |     | NULL    |       |
+| salary      | int         | YES  |     | NULL    |       |
+| dept_no     | int         | YES  | MUL | NULL    |       |
+| designation | varchar(20) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> insert into EMPLOYEE values(1,'aa',4545454545,50000,10,'Manager'),
+    -> insert into EMPLOYEE values(2,'bb',4646464646,60000,20,'Support Engineer'),
+    -> insert into EMPLOYEE values(3,'cc',4646462626,20000,30,'Alanyst'),
+    -> insert into EMPLOYEE values(3,'cc',4646462626,20000,30,'Alanyst');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'insert into EMPLOYEE values(2,'bb',4646464646,60000,20,'Support Engineer'),
+inse' at line 2
+mysql> insert into EMPLOYEE values(1,'aa',4646462626,20000,10,'Alanyst');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into EMPLOYEE values(2,'bb',4126462626,25000,20,'Chasier');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into EMPLOYEE values(3,'cc',4122362626,65000,30,'Manager');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into EMPLOYEE values(4,'dd',4122122626,40000,40,'HR');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into EMPLOYEE values(5,'ee',4122122456,30000,50,'Engineer');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into EMPLOYEE values(6,'ff',421324556,32100,60,'Developer');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into EMPLOYEE values(7,'gg',421312556,32300,70,'Designer');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into EMPLOYEE values(8,'hh',421122556,32500,80,'Marketing lead');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into EMPLOYEE values(9,'ii',412342556,33300,90,'Sales Exicutive');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into EMPLOYEE values(10,'kk',41234221,12500,100,'Accountant');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> Select * from EMPLOYEE;
++--------+----------+------------+--------+---------+-----------------+
+| emp_no | emp_name | ph_no      | salary | dept_no | designation     |
++--------+----------+------------+--------+---------+-----------------+
+|      1 | aa       | 4646462626 |  20000 |      10 | Alanyst         |
+|      2 | bb       | 4126462626 |  25000 |      20 | Chasier         |
+|      3 | cc       | 4122362626 |  65000 |      30 | Manager         |
+|      4 | dd       | 4122122626 |  40000 |      40 | HR              |
+|      5 | ee       | 4122122456 |  30000 |      50 | Engineer        |
+|      6 | ff       |  421324556 |  32100 |      60 | Developer       |
+|      7 | gg       |  421312556 |  32300 |      70 | Designer        |
+|      8 | hh       |  421122556 |  32500 |      80 | Marketing lead  |
+|      9 | ii       |  412342556 |  33300 |      90 | Sales Exicutive |
+|     10 | kk       |   41234221 |  12500 |     100 | Accountant      |
++--------+----------+------------+--------+---------+-----------------+
+10 rows in set (0.00 sec)
+
+mysql> select emp_no,emp_name from EMPLOYEE where dept_no=20;
++--------+----------+
+| emp_no | emp_name |
++--------+----------+
+|      2 | bb       |
++--------+----------+
+1 row in set (0.00 sec)
+
+mysql> select emp_no,emp_name,designation,dept_no,salary from EMPLOYEE Order By Salary desc;
++--------+----------+-----------------+---------+--------+
+| emp_no | emp_name | designation     | dept_no | salary |
++--------+----------+-----------------+---------+--------+
+|      3 | cc       | Manager         |      30 |  65000 |
+|      4 | dd       | HR              |      40 |  40000 |
+|      9 | ii       | Sales Exicutive |      90 |  33300 |
+|      8 | hh       | Marketing lead  |      80 |  32500 |
+|      7 | gg       | Designer        |      70 |  32300 |
+|      6 | ff       | Developer       |      60 |  32100 |
+|      5 | ee       | Engineer        |      50 |  30000 |
+|      2 | bb       | Chasier         |      20 |  25000 |
+|      1 | aa       | Alanyst         |      10 |  20000 |
+|     10 | kk       | Accountant      |     100 |  12500 |
++--------+----------+-----------------+---------+--------+
+10 rows in set (0.00 sec)
+
+mysql> select emp_no,emp_name from EMPLOYEE where salary between 20000 and 50000;
++--------+----------+
+| emp_no | emp_name |
++--------+----------+
+|      1 | aa       |
+|      2 | bb       |
+|      4 | dd       |
+|      5 | ee       |
+|      6 | ff       |
+|      7 | gg       |
+|      8 | hh       |
+|      9 | ii       |
++--------+----------+
+8 rows in set (0.00 sec)
+
+mysql> select DISTINCT designation from EMPLOYEE;
++-----------------+
+| designation     |
++-----------------+
+| Alanyst         |
+| Chasier         |
+| Manager         |
+| HR              |
+| Engineer        |
+| Developer       |
+| Designer        |
+| Marketing lead  |
+| Sales Exicutive |
+| Accountant      |
++-----------------+
+10 rows in set (0.00 sec)
+
+mysql> update EMPLOYEE set salary=45000 where designation='Manager';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update EMPLOYEE set ph_no=9876543210 where emp_name=jj;
+ERROR 1054 (42S22): Unknown column 'jj' in 'where clause'
+mysql> update EMPLOYEE set ph_no=9876543210 where emp_name='bb';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> desc EMPLOYEE;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| emp_no      | int         | NO   | PRI | NULL    |       |
+| emp_name    | varchar(15) | YES  |     | NULL    |       |
+| ph_no       | bigint      | YES  |     | NULL    |       |
+| salary      | int         | YES  |     | NULL    |       |
+| dept_no     | int         | YES  | MUL | NULL    |       |
+| designation | varchar(20) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> select 8 from EMPLOYEE;
++---+
+| 8 |
++---+
+| 8 |
+| 8 |
+| 8 |
+| 8 |
+| 8 |
+| 8 |
+| 8 |
+| 8 |
+| 8 |
+| 8 |
++---+
+10 rows in set (0.00 sec)
+
+mysql> select * from EMPLOYEE;
++--------+----------+------------+--------+---------+-----------------+
+| emp_no | emp_name | ph_no      | salary | dept_no | designation     |
++--------+----------+------------+--------+---------+-----------------+
+|      1 | aa       | 4646462626 |  20000 |      10 | Alanyst         |
+|      2 | bb       | 9876543210 |  25000 |      20 | Chasier         |
+|      3 | cc       | 4122362626 |  45000 |      30 | Manager         |
+|      4 | dd       | 4122122626 |  40000 |      40 | HR              |
+|      5 | ee       | 4122122456 |  30000 |      50 | Engineer        |
+|      6 | ff       |  421324556 |  32100 |      60 | Developer       |
+|      7 | gg       |  421312556 |  32300 |      70 | Designer        |
+|      8 | hh       |  421122556 |  32500 |      80 | Marketing lead  |
+|      9 | ii       |  412342556 |  33300 |      90 | Sales Exicutive |
+|     10 | kk       |   41234221 |  12500 |     100 | Accountant      |
++--------+----------+------------+--------+---------+-----------------+
+10 rows in set (0.00 sec)
