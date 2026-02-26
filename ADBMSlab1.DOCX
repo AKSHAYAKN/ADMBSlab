@@ -1,0 +1,246 @@
+mysql> CREATE DATABASE TCL
+    -> ;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> USE TCL;
+Database changed
+mysql> create table Order_Details(Order_Id INT,Product_Name VARHAR(50),Order_No INT, Order_Date);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'VARHAR(50),Order_No INT, Order_Date)' at line 1
+mysql> CREATE TABLE Order_Details(Order_Id INT,Product_Name VARCHAR950),
+    -> Order_No INT,Order_Date Date);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'VARCHAR950),
+Order_No INT,Order_Date Date)' at line 1
+mysql> CREATE TABLE Order_Details (
+    ->     Order_Id INT,
+    ->     Product_Name VARCHAR(50),
+    ->     Order_No INT,
+    ->     Order_Date DATE
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc Order_Details;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| Order_Id     | int         | YES  |     | NULL    |       |
+| Product_Name | varchar(50) | YES  |     | NULL    |       |
+| Order_No     | int         | YES  |     | NULL    |       |
+| Order_Date   | date        | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> INSERT INTO Order_Details VALUES(1,'Laptop',234,'2000-03-02');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO Order_Details VALUES(
+    -> 2,'Desktop',456,'2001-02-02'),
+    -> (3,'Keyboard',457,'2000-03-02'),
+    -> (4,'Mouse',500,'2001-03-02'),
+    -> (5,'AntoVirus',501,'2002-03-02');
+Query OK, 4 rows affected (0.03 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from Order_Details;
++----------+--------------+----------+------------+
+| Order_Id | Product_Name | Order_No | Order_Date |
++----------+--------------+----------+------------+
+|        1 | Laptop       |      234 | 2000-03-02 |
+|        2 | Desktop      |      456 | 2001-02-02 |
+|        3 | Keyboard     |      457 | 2000-03-02 |
+|        4 | Mouse        |      500 | 2001-03-02 |
+|        5 | AntoVirus    |      501 | 2002-03-02 |
++----------+--------------+----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> START TRANSACTION;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> INSERT INTO Order_Details VALUES(6,'Printer',600,'2003-04-05'),
+    -> (7,'Scanner',601,'2004-06-07');
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from Order_Details;
++----------+--------------+----------+------------+
+| Order_Id | Product_Name | Order_No | Order_Date |
++----------+--------------+----------+------------+
+|        1 | Laptop       |      234 | 2000-03-02 |
+|        2 | Desktop      |      456 | 2001-02-02 |
+|        3 | Keyboard     |      457 | 2000-03-02 |
+|        4 | Mouse        |      500 | 2001-03-02 |
+|        5 | AntoVirus    |      501 | 2002-03-02 |
+|        6 | Printer      |      600 | 2003-04-05 |
+|        7 | Scanner      |      601 | 2004-06-07 |
++----------+--------------+----------+------------+
+7 rows in set (0.00 sec)
+
+mysql> ROLLBACK;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select * from Order_Details;
++----------+--------------+----------+------------+
+| Order_Id | Product_Name | Order_No | Order_Date |
++----------+--------------+----------+------------+
+|        1 | Laptop       |      234 | 2000-03-02 |
+|        2 | Desktop      |      456 | 2001-02-02 |
+|        3 | Keyboard     |      457 | 2000-03-02 |
+|        4 | Mouse        |      500 | 2001-03-02 |
+|        5 | AntoVirus    |      501 | 2002-03-02 |
++----------+--------------+----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> START TRANSACTION;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> DELETE FROM Order_Details WHERE Order_Id IN(4,5);
+Query OK, 2 rows affected (0.01 sec)
+
+mysql> select * from Order_Details;
++----------+--------------+----------+------------+
+| Order_Id | Product_Name | Order_No | Order_Date |
++----------+--------------+----------+------------+
+|        1 | Laptop       |      234 | 2000-03-02 |
+|        2 | Desktop      |      456 | 2001-02-02 |
+|        3 | Keyboard     |      457 | 2000-03-02 |
++----------+--------------+----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select * from Order_Details;
++----------+--------------+----------+------------+
+| Order_Id | Product_Name | Order_No | Order_Date |
++----------+--------------+----------+------------+
+|        1 | Laptop       |      234 | 2000-03-02 |
+|        2 | Desktop      |      456 | 2001-02-02 |
+|        3 | Keyboard     |      457 | 2000-03-02 |
++----------+--------------+----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> SET autocommit=0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SAVEPOINT svp_update;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> UPDATE Order_Details SET Product_Name='Gamming Keyboard' WHERE Order_no=457;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Order_Details;
++----------+------------------+----------+------------+
+| Order_Id | Product_Name     | Order_No | Order_Date |
++----------+------------------+----------+------------+
+|        1 | Laptop           |      234 | 2000-03-02 |
+|        2 | Desktop          |      456 | 2001-02-02 |
+|        3 | Gamming Keyboard |      457 | 2000-03-02 |
++----------+------------------+----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO Order_Details VALUES(8,'Webcam',700,'2005-07-08'),
+    -> (9,'Speaker',701,'2006-09-10');
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from Order_Details;
++----------+------------------+----------+------------+
+| Order_Id | Product_Name     | Order_No | Order_Date |
++----------+------------------+----------+------------+
+|        1 | Laptop           |      234 | 2000-03-02 |
+|        2 | Desktop          |      456 | 2001-02-02 |
+|        3 | Gamming Keyboard |      457 | 2000-03-02 |
+|        8 | Webcam           |      700 | 2005-07-08 |
+|        9 | Speaker          |      701 | 2006-09-10 |
++----------+------------------+----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SAVEPOINT avp_delete;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SAVEPOINT svp_delete;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> DELETE FROM Order_Details WHERE Product_Name='Desktop';
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from Order_Details;
++----------+------------------+----------+------------+
+| Order_Id | Product_Name     | Order_No | Order_Date |
++----------+------------------+----------+------------+
+|        1 | Laptop           |      234 | 2000-03-02 |
+|        3 | Gamming Keyboard |      457 | 2000-03-02 |
+|        8 | Webcam           |      700 | 2005-07-08 |
+|        9 | Speaker          |      701 | 2006-09-10 |
++----------+------------------+----------+------------+
+4 rows in set (0.01 sec)
+
+mysql> ROLLBACK TO svp_delete;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from Order_Details;
++----------+------------------+----------+------------+
+| Order_Id | Product_Name     | Order_No | Order_Date |
++----------+------------------+----------+------------+
+|        1 | Laptop           |      234 | 2000-03-02 |
+|        2 | Desktop          |      456 | 2001-02-02 |
+|        3 | Gamming Keyboard |      457 | 2000-03-02 |
+|        8 | Webcam           |      700 | 2005-07-08 |
+|        9 | Speaker          |      701 | 2006-09-10 |
++----------+------------------+----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> ROLLBACK TO svp_update;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select * from Order_Details;
++----------+--------------+----------+------------+
+| Order_Id | Product_Name | Order_No | Order_Date |
++----------+--------------+----------+------------+
+|        1 | Laptop       |      234 | 2000-03-02 |
+|        2 | Desktop      |      456 | 2001-02-02 |
+|        3 | Keyboard     |      457 | 2000-03-02 |
++----------+--------------+----------+------------+
+3 rows in set (0.01 sec)
+
+mysql> COMMIT;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SET autocommit=1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from Order_Details;
++----------+--------------+----------+------------+
+| Order_Id | Product_Name | Order_No | Order_Date |
++----------+--------------+----------+------------+
+|        1 | Laptop       |      234 | 2000-03-02 |
+|        2 | Desktop      |      456 | 2001-02-02 |
+|        3 | Keyboard     |      457 | 2000-03-02 |
++----------+--------------+----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> rows affected (0.01 sec)
+    -> 
+    -> mysql> SET autocommit=1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'rows affected (0.01 sec)
+
+mysql> SET autocommit=1' at line 1
+mysql> Query OK, 0 rows affected (0.00 sec)
+    -> 
+    -> mysql> select * from Order_Details;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from Order_Details' at line 1
+mysql> +----------+--------------+----------+------------+
+    -> | Order_Id | Product_Name | Order_No | Order_Date |
+    -> +----------+--------------+----------+------------+
+    -> |        1 | Laptop       |      234 | 2000-03-02 |
+    -> |        2 | Desktop      |      456 | 2001-02-02 |
+    -> |        3 | Keyboard     |      457 | 2000-03-02 |
+    -> +----------+--------------+----------+------------+
+    -> 3 rows in set (0.00 sec)
+    -> 
+    -> mysql> 
+    -> 
+
+

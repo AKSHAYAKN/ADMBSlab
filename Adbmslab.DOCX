@@ -1,0 +1,535 @@
+ CREATE DATABASE CompanyDB;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> CREATE TABLE Employee (
+    ->     Emp_Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ->     Emp_name VARCHAR(100) NOT NULL,
+    ->     Design VARCHAR(50),
+    ->     Dept_Id INT,
+    ->     Joining_Date DATE,
+    ->     CONSTRAINT fk_dept FOREIGN KEY (Dept_Id) REFERENCES Department(Dept_Id)
+    -> );
+ERROR 1046 (3D000): No database selected
+mysql> use CompanyDB;
+Database changed
+mysql> CREATE TABLE Employee (
+    ->     Emp_Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ->     Emp_name VARCHAR(100) NOT NULL,
+    ->     Design VARCHAR(50),
+    ->     Dept_Id INT,
+    ->     Joining_Date DATE,
+    ->     CONSTRAINT fk_dept FOREIGN KEY (Dept_Id) REFERENCES Department(Dept_Id)
+    -> );
+ERROR 1824 (HY000): Failed to open the referenced table 'Department'
+mysql> CREATE TABLE Department (
+    ->     Dept_Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ->     Dept_name VARCHAR(100) NOT NULL
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE Employee (
+    ->     Emp_Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ->     Emp_name VARCHAR(100) NOT NULL,
+    ->     Design VARCHAR(50),
+    ->     Dept_Id INT,
+    ->     Joining_Date DATE,
+    ->     CONSTRAINT fk_dept FOREIGN KEY (Dept_Id) REFERENCES Department(Dept_Id)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> INSERT INTO Employee (Emp_name, Design, Dept_Id, Joining_Date)
+    -> VALUES ('Alice', 'Manager', 1, '2022-01-15');
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`CompanyDB`.`Employee`, CONSTRAINT `fk_dept` FOREIGN KEY (`Dept_Id`) REFERENCES `Department` (`Dept_Id`))
+mysql> INSERT INTO Department (Dept_name) VALUES ('HR');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Department (Dept_name) VALUES ('IT');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO Department (Dept_name) VALUES ('Finance');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Department (Dept_name) VALUES ('Sales');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Department (Dept_name) VALUES ('Admin');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> CREATE TABLE Employee (
+    ->     ->     Emp_Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ->     ->     Emp_name VARCHAR(100) NOT NULL,
+    ->     ->     Design VARCHAR(50),
+    ->     ->     Dept_Id INT,
+    ->     ->     Joining_Date DATE,
+    ->     ->     CONSTRAINT fk_dept FOREIGN KEY (Dept_Id) REFERENCES Department(Dept_Id)
+    ->     -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '->     Emp_Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ->     Emp_name VARCH' at line 2
+mysql> CREATE TABLE Employee(
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> INSERT INTO Employee (Emp_name, Design, Dept_Id, Joining_Date)
+    -> VALUES ('Diana', 'HR', 3, '2022-11-05');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Employee;
++--------+----------+--------+---------+--------------+
+| Emp_Id | Emp_name | Design | Dept_Id | Joining_Date |
++--------+----------+--------+---------+--------------+
+|      2 | Diana    | HR     |       3 | 2022-11-05   |
++--------+----------+--------+---------+--------------+
+1 row in set (0.00 sec)
+
+mysql> select * from Department;
++---------+-----------+
+| Dept_Id | Dept_name |
++---------+-----------+
+|       1 | HR        |
+|       2 | IT        |
+|       3 | Finance   |
+|       4 | Sales     |
+|       5 | Admin     |
++---------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> INSERT INTO Employee (Emp_name, Design, Dept_Id, Joining_Date) VALUES ('Veena', 'Analyst', 2, '2001-11-05');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO Employee (Emp_name, Design, Dept_Id, Joining_Date) VALUES ('Geethu', 'Finance', 3, '2000-1-05');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Employee (Emp_name, Design, Dept_Id, Joining_Date) VALUES ('Minnu', 'Admin', 1, '2006-1-12');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO Employee (Emp_name, Design, Dept_Id, Joining_Date) VALUES ('Abhi', 'Sales', 2, '2006-5-11');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO Employee (Emp_name, Design, Dept_Id, Joining_Date) VALUES ('Abhishek', 'IT', 1, '2002-7-21');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO Employee (Emp_name, Design, Dept_Id, Joining_Date) VALUES ('Abhay', 'HR', 3, '2002-8-21');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Employee;
++--------+----------+---------+---------+--------------+
+| Emp_Id | Emp_name | Design  | Dept_Id | Joining_Date |
++--------+----------+---------+---------+--------------+
+|      2 | Diana    | HR      |       3 | 2022-11-05   |
+|      3 | Veena    | Analyst |       2 | 2001-11-05   |
+|      4 | Geethu   | Finance |       3 | 2000-01-05   |
+|      5 | Minnu    | Admin   |       1 | 2006-01-12   |
+|      6 | Abhi     | Sales   |       2 | 2006-05-11   |
+|      7 | Abhishek | IT      |       1 | 2002-07-21   |
+|      8 | Abhay    | HR      |       3 | 2002-08-21   |
++--------+----------+---------+---------+--------------+
+7 rows in set (0.00 sec)
+
+mysql> ALTER TABLE Employee
+    -> ADD salary INT;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> UPDATE Employee
+    -> SET salary = 50000
+    -> WHERE Emp_name = 'Alice';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> UPDATE Employee SET salary = 50000 WHERE Emp_name = 'Abhay';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE Employee SET salary = 60000 WHERE Emp_name = 'Minnu';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE Employee SET salary = 12000 WHERE Emp_name = 'Diana';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE Employee SET salary = 12000 WHERE Emp_name = 'Veena';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE Employee SET salary = 23000 WHERE Emp_name = 'Geethu';
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE Employee SET salary = 50000 WHERE Emp_name = 'Abhi';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE Employee SET salary = 520000 WHERE Emp_name = 'Abhishek';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Employee;
++--------+----------+---------+---------+--------------+--------+
+| Emp_Id | Emp_name | Design  | Dept_Id | Joining_Date | salary |
++--------+----------+---------+---------+--------------+--------+
+|      2 | Diana    | HR      |       3 | 2022-11-05   |  12000 |
+|      3 | Veena    | Analyst |       2 | 2001-11-05   |  12000 |
+|      4 | Geethu   | Finance |       3 | 2000-01-05   |  23000 |
+|      5 | Minnu    | Admin   |       1 | 2006-01-12   |  60000 |
+|      6 | Abhi     | Sales   |       2 | 2006-05-11   |  50000 |
+|      7 | Abhishek | IT      |       1 | 2002-07-21   | 520000 |
+|      8 | Abhay    | HR      |       3 | 2002-08-21   |  50000 |
++--------+----------+---------+---------+--------------+--------+
+7 rows in set (0.01 sec)
+
+mysql> alter table Employee add constraints fk_dept foreign key(Dept_Id) References Department(Dept_Id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'fk_dept foreign key(Dept_Id) References Department(Dept_Id)' at line 1
+mysql> ALTER TABLE Employee
+    -> ADD CONSTRAINT fk_dept
+    -> FOREIGN KEY (Dept_Id) 
+    -> REFERENCES Department(Dept_Id);
+ERROR 1826 (HY000): Duplicate foreign key constraint name 'fk_dept'
+mysql> select e.Emp_name,d.Dept_name from Employee e JOIN Department d ON e.Dept_Id=d.Dept_Id;
++----------+-----------+
+| Emp_name | Dept_name |
++----------+-----------+
+| Diana    | Finance   |
+| Veena    | IT        |
+| Geethu   | Finance   |
+| Minnu    | HR        |
+| Abhi     | IT        |
+| Abhishek | HR        |
+| Abhay    | Finance   |
++----------+-----------+
+7 rows in set (0.00 sec)
+
+mysql> select d.Dept_name from employee JOIN Department ON Dept_Id=Dept_Id where e.Emp_name='Geethu';
+ERROR 1146 (42S02): Table 'CompanyDB.employee' doesn't exist
+mysql> select d.Dept_name from Employee JOIN Department ON Dept_Id=Dept_Id where
+ e.Emp_name='Geethu';
+ERROR 1054 (42S22): Unknown column 'd.Dept_name' in 'field list'
+mysql> SELECT d.Dept_name
+    -> FROM Employee
+    -> JOIN Department ON Dept_Id = Dept_Id
+    -> WHERE e.Emp_name='Geethu';
+ERROR 1054 (42S22): Unknown column 'd.Dept_name' in 'field list'
+mysql> SELECT d. Dept_name FROM Employee JOIN Department ON Dept_Id = Dept_Id WHERE e.Emp_name='Geethu';
+ERROR 1054 (42S22): Unknown column 'd.Dept_name' in 'field list'
+mysql> SELECT d.Dept_name
+    -> FROM Employee e
+    -> JOIN Department d ON e.Dept_Id = d.Dept_Id
+    -> WHERE e.Emp_name = 'Geethu';
++-----------+
+| Dept_name |
++-----------+
+| Finance   |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select e.salary from Employee e INNER JOIN Department d on e.Dept_Id=d.Dept_Id where d.Dept_name='HR';
++--------+
+| salary |
++--------+
+|  60000 |
+| 520000 |
++--------+
+2 rows in set (0.00 sec)
+
+mysql> select e.*from Employee e.join Department d on e.Dept_Id=d.Dept_Id where e.Design='Analyst' and d.Dept_name='IT';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.join Department d on e.Dept_Id=d.Dept_Id where e.Design='Analyst' and d.Dept_na' at line 1
+mysql> SELECT e.*
+    -> FROM Employee e
+    -> JOIN Department d ON e.Dept_Id = d.Dept_Id
+    -> WHERE e.Design = 'Analyst'
+    ->   AND d.Dept_name = 'IT';
++--------+----------+---------+---------+--------------+--------+
+| Emp_Id | Emp_name | Design  | Dept_Id | Joining_Date | salary |
++--------+----------+---------+---------+--------------+--------+
+|      3 | Veena    | Analyst |       2 | 2001-11-05   |  12000 |
++--------+----------+---------+---------+--------------+--------+
+1 row in set (0.00 sec)
+
+mysql> SELECT e.*
+    -> FROM Employee e
+    -> JOIN Department d ON e.Dept_Id = d.Dept_Id
+    -> WHERE e.Design = 'Analyst'
+    ->   AND d.Dept_name = 'IT';
++--------+----------+---------+---------+--------------+--------+
+| Emp_Id | Emp_name | Design  | Dept_Id | Joining_Date | salary |
++--------+----------+---------+---------+--------------+--------+
+|      3 | Veena    | Analyst |       2 | 2001-11-05   |  12000 |
++--------+----------+---------+---------+--------------+--------+
+1 row in set (0.00 sec)
+
+mysql> SELECT e.*
+    -> FROM Employee e
+    -> JOIN Department d ON e.Dept_Id = d.Dept_Id
+    -> WHERE e.Design = 'Analyst'
+    ->   AND d.Dept_name = 'IT';
++--------+----------+---------+---------+--------------+--------+
+| Emp_Id | Emp_name | Design  | Dept_Id | Joining_Date | salary |
++--------+----------+---------+---------+--------------+--------+
+|      3 | Veena    | Analyst |       2 | 2001-11-05   |  12000 |
++--------+----------+---------+---------+--------------+--------+
+1 row in set (0.00 sec)
+
+mysql> select e.salary from Employee e.join Department d ON e.Dept_Id=d.Dept_Id where d.Dept_name='Finance';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.join Department d ON e.Dept_Id=d.Dept_Id where d.Dept_name='Finance'' at line 1
+mysql> SELECT e.salary
+    -> FROM Employee e
+    -> JOIN Department d ON e.Dept_Id = d.Dept_Id
+    -> WHERE d.Dept_name = 'Finance';
++--------+
+| salary |
++--------+
+|  12000 |
+|  23000 |
+|  50000 |
++--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from Employee e JOIN Department d ON e.Dept_Id=d.Dept_Id where d.Dept_name NOT IN('Finance','HR');
++--------+----------+---------+---------+--------------+--------+---------+-----------+
+| Emp_Id | Emp_name | Design  | Dept_Id | Joining_Date | salary | Dept_Id | Dept_name |
++--------+----------+---------+---------+--------------+--------+---------+-----------+
+|      3 | Veena    | Analyst |       2 | 2001-11-05   |  12000 |       2 | IT        |
+|      6 | Abhi     | Sales   |       2 | 2006-05-11   |  50000 |       2 | IT        |
++--------+----------+---------+---------+--------------+--------+---------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> select d.Dept_name from Employee e JOIN Department d ON e.Dept_Id=d.Dept_Id where e.salary=(select MAX(salary) from Employee);
++-----------+
+| Dept_name |
++-----------+
+| HR        |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select d.Dept_name from Employee e JOIN Department d ON e.Dpet_Id=d.Dept_Id Group BY d.Dept_name Having Count(*)=(select MIN(cnt) from(select COUNT (*) cnt from Employee group by Dept_id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*) cnt from Employee group by Dept_id))' at line 1
+mysql> SELECT d.Dept_name
+    -> FROM Employee e
+    -> JOIN Department d ON e.Dept_Id = d.Dept_Id
+    -> GROUP BY d.Dept_name
+    -> HAVING COUNT(*) = (
+    ->     SELECT MIN(emp_count)
+    ->     FROM (
+    ->         SELECT COUNT(*) AS emp_count
+    ->         FROM Employee
+    ->         GROUP BY Dept_Id
+    ->     ) AS sub
+    -> );
++-----------+
+| Dept_name |
++-----------+
+| HR        |
+| IT        |
++-----------+
+2 rows in set (0.00 sec)
+
+mysql> select e.Emp_name from Employee e where e.salary>(select AVG(salary) fromEmployee where Dept_Id=e.Dept_Id);
+Empty set (0.00 sec)
+
+mysql> SELECT e.Emp_name, e.salary, d.Dept_name
+    -> FROM Employee e
+    -> JOIN Department d ON e.Dept_Id = d.Dept_Id
+    -> WHERE e.salary > (
+    ->     SELECT AVG(salary)
+    ->     FROM Employee
+    ->     WHERE Dept_Id = e.Dept_Id
+    -> );
++----------+--------+-----------+
+| Emp_name | salary | Dept_name |
++----------+--------+-----------+
+| Abhi     |  50000 | IT        |
+| Abhishek | 520000 | HR        |
+| Abhay    |  50000 | Finance   |
++----------+--------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select Dept_Id, COUNT(*) AS "Number of Dept_Employees" from Employee Group By Dept_Id Having COUNT(*)>2;
++---------+--------------------------+
+| Dept_Id | Number of Dept_Employees |
++---------+--------------------------+
+|       3 |                        3 |
++---------+--------------------------+
+1 row in set (0.00 sec)
+
+mysql> select Dept_Id,MIN(salary) AS "Lowest salary" from Employee group by Dept_Id;
++---------+---------------+
+| Dept_Id | Lowest salary |
++---------+---------------+
+|       1 |         60000 |
+|       2 |         12000 |
+|       3 |         12000 |
++---------+---------------+
+3 rows in set (0.00 sec)
+
+mysql> select e.Dept_Id,e.Emp_name from Employee where e.salary=(select MAX(salary)from Employee where Dept_Id=e.Dept_Id);
+ERROR 1054 (42S22): Unknown column 'e.Dept_Id' in 'field list'
+mysql> SELECT e.Dept_Id, e.Emp_name, e.salary
+    -> FROM Employee e
+    -> WHERE e.salary = (
+    ->     SELECT MAX(salary)
+    ->     FROM Employee
+    ->     WHERE Dept_Id = e.Dept_Id
+    -> );
++---------+----------+--------+
+| Dept_Id | Emp_name | salary |
++---------+----------+--------+
+|       2 | Abhi     |  50000 |
+|       1 | Abhishek | 520000 |
+|       3 | Abhay    |  50000 |
++---------+----------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select d.Dept_name from Employee e JOIN Department d ON e.Dept_Id=d.Dept_Id Group By d.Dept_name Having sum(e.salary)=(select MIN(total) from (select SUM(salary) total from Employee Group By Dept_Id) t);
++-----------+
+| Dept_name |
++-----------+
+| IT        |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select * from Employee where Year(Joining_Date)=2003;
+Empty set (0.00 sec)
+
+mysql> select * from Employee where Year(Joining_Date)=2001;
++--------+----------+---------+---------+--------------+--------+
+| Emp_Id | Emp_name | Design  | Dept_Id | Joining_Date | salary |
++--------+----------+---------+---------+--------------+--------+
+|      3 | Veena    | Analyst |       2 | 2001-11-05   |  12000 |
++--------+----------+---------+---------+--------------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from Employee where month(Joining_Date)=5;
++--------+----------+--------+---------+--------------+--------+
+| Emp_Id | Emp_name | Design | Dept_Id | Joining_Date | salary |
++--------+----------+--------+---------+--------------+--------+
+|      6 | Abhi     | Sales  |       2 | 2006-05-11   |  50000 |
++--------+----------+--------+---------+--------------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from Department d where NOT EXISTS(select * from Employee e where e.Dept_Id=d.Dept_Id);
++---------+-----------+
+| Dept_Id | Dept_name |
++---------+-----------+
+|       4 | Sales     |
+|       5 | Admin     |
++---------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT INTO Employee(Emp_Id,Emp_name,Design,Dept_Id,salary,Joining_Date) values(120,'Ravi','Clerk',NULL,15000,'2004-01-01');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from Employee;
++--------+----------+---------+---------+--------------+--------+
+| Emp_Id | Emp_name | Design  | Dept_Id | Joining_Date | salary |
++--------+----------+---------+---------+--------------+--------+
+|      2 | Diana    | HR      |       3 | 2022-11-05   |  12000 |
+|      3 | Veena    | Analyst |       2 | 2001-11-05   |  12000 |
+|      4 | Geethu   | Finance |       3 | 2000-01-05   |  23000 |
+|      5 | Minnu    | Admin   |       1 | 2006-01-12   |  60000 |
+|      6 | Abhi     | Sales   |       2 | 2006-05-11   |  50000 |
+|      7 | Abhishek | IT      |       1 | 2002-07-21   | 520000 |
+|      8 | Abhay    | HR      |       3 | 2002-08-21   |  50000 |
+|    120 | Ravi     | Clerk   |    NULL | 2004-01-01   |  15000 |
++--------+----------+---------+---------+--------------+--------+
+8 rows in set (0.00 sec)
+
+mysql> update Employee SET Dept_Id = 2 where Emp_name='Ravi' and Dept_Id is NULL;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Employee;
++--------+----------+---------+---------+--------------+--------+
+| Emp_Id | Emp_name | Design  | Dept_Id | Joining_Date | salary |
++--------+----------+---------+---------+--------------+--------+
+|      2 | Diana    | HR      |       3 | 2022-11-05   |  12000 |
+|      3 | Veena    | Analyst |       2 | 2001-11-05   |  12000 |
+|      4 | Geethu   | Finance |       3 | 2000-01-05   |  23000 |
+|      5 | Minnu    | Admin   |       1 | 2006-01-12   |  60000 |
+|      6 | Abhi     | Sales   |       2 | 2006-05-11   |  50000 |
+|      7 | Abhishek | IT      |       1 | 2002-07-21   | 520000 |
+|      8 | Abhay    | HR      |       3 | 2002-08-21   |  50000 |
+|    120 | Ravi     | Clerk   |       2 | 2004-01-01   |  15000 |
++--------+----------+---------+---------+--------------+--------+
+8 rows in set (0.00 sec)
+
+mysql> select d.Dept_name,e.Emp_name from Depratment d left JOIN Employee e ON d.Dept_Id=e.Dept_Id;
+ERROR 1146 (42S02): Table 'CompanyDB.Depratment' doesn't exist
+mysql> SELECT d.Dept_name, e.Emp_name
+    -> FROM Department d
+    -> LEFT JOIN Employee e ON d.Dept_Id = e.Dept_Id;
++-----------+----------+
+| Dept_name | Emp_name |
++-----------+----------+
+| HR        | Minnu    |
+| HR        | Abhishek |
+| IT        | Veena    |
+| IT        | Abhi     |
+| IT        | Ravi     |
+| Finance   | Diana    |
+| Finance   | Geethu   |
+| Finance   | Abhay    |
+| Sales     | NULL     |
+| Admin     | NULL     |
++-----------+----------+
+10 rows in set (0.00 sec)
+
+mysql> select e.Emp_name, d.Dept_name from Employee e LEFT JOIN Department d ON e.Dept_id=d.Dept_id;
++----------+-----------+
+| Emp_name | Dept_name |
++----------+-----------+
+| Diana    | Finance   |
+| Veena    | IT        |
+| Geethu   | Finance   |
+| Minnu    | HR        |
+| Abhi     | IT        |
+| Abhishek | HR        |
+| Abhay    | Finance   |
+| Ravi     | IT        |
++----------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select Emp_name,COALESCE(Dept_id,0)AS Dept_Id from Employee;
++----------+---------+
+| Emp_name | Dept_Id |
++----------+---------+
+| Diana    |       3 |
+| Veena    |       2 |
+| Geethu   |       3 |
+| Minnu    |       1 |
+| Abhi     |       2 |
+| Abhishek |       1 |
+| Abhay    |       3 |
+| Ravi     |       2 |
++----------+---------+
+8 rows in set (0.00 sec)
+
+mysql> select d.Dept_name,e.Emp_name from Department d.FULL OUTER JOIN Employee e ON d.Dept_Id =e.Dept_Id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.FULL OUTER JOIN Employee e ON d.Dept_Id =e.Dept_Id' at line 1
+mysql> -- Employees and departments, including all departments and all employees 
+mysql> SELECT d.Dept_name, e.Emp_name
+    -> FROM Department d
+    -> LEFT JOIN Employee e ON d.Dept_Id = e.Dept_Id
+    -> 
+    -> UNION
+    -> 
+    -> SELECT d.Dept_name, e.Emp_name
+    -> FROM Department d
+    -> RIGHT JOIN Employee e ON d.Dept_Id = e.Dept_Id;
++-----------+----------+
+| Dept_name | Emp_name |
++-----------+----------+
+| HR        | Minnu    |
+| HR        | Abhishek |
+| IT        | Veena    |
+| IT        | Abhi     |
+| IT        | Ravi     |
+| Finance   | Diana    |
+| Finance   | Geethu   |
+| Finance   | Abhay    |
+| Sales     | NULL     |
+| Admin     | NULL     |
++-----------+----------+
+10 rows in set (0.00 sec)
+
+mysql> 
+
+
