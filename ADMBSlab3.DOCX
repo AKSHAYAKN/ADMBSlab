@@ -1,0 +1,120 @@
+mysql>  SHOW TABLES;
+ERROR 1046 (3D000): No database selected
+mysql> USE COLLEGE;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql>  SHOW TABLES;
++-------------------+
+| Tables_in_COLLEGE |
++-------------------+
+| STUDENT           |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> desc STUDENT;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| Rollno | int         | YES  |     | NULL    |       |
+| Name   | varchar(30) | YES  |     | NULL    |       |
+| DOB    | date        | YES  |     | NULL    |       |
+| Place  | varchar(30) | YES  |     | NULL    |       |
+| PH_no  | int         | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+mysql> alter TABLE STUDENT modify column Rollno varchar;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql>
+mysql> CREATE TABLE COURSE(Course_code int(10),Course_name varchar(30),Credit int(6));
+Query OK, 0 rows affected, 2 warnings (0.05 sec)
+
+mysql> SHOW TABLES;
++-------------------+
+| Tables_in_COLLEGE |
++-------------------+
+| COURSE            |
+| STUDENT           |
++-------------------+
+2 rows in set (0.01 sec)
+
+mysql> DESC COURSE;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| Course_code | int         | YES  |     | NULL    |       |
+| Course_name | varchar(30) | YES  |     | NULL    |       |
+| Credit      | int         | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> ALTER TABLE STUDENT DROP PH_no;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC STUDENT;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| Rollno | int         | YES  |     | NULL    |       |
+| Name   | varchar(30) | YES  |     | NULL    |       |
+| DOB    | date        | YES  |     | NULL    |       |
+| Place  | varchar(30) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> ALTER TABLE STUDENT ADD Aadhar_no;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> ALTER TABLE STUDENT ADD Aadhar_no; varchar(50);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar(50)' at line 1
+mysql> ALTER TABLE STUDENT ADD Aadhar_no; varchar(12);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar(12)' at line 1
+mysql> ALTER TABLE STUDENT ADD Aadhar_no varchar(12);
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC STUDENT;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| Rollno    | int         | YES  |     | NULL    |       |
+| Name      | varchar(30) | YES  |     | NULL    |       |
+| DOB       | date        | YES  |     | NULL    |       |
+| Place     | varchar(30) | YES  |     | NULL    |       |
+| Aadhar_no | varchar(12) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> DROP TABLE STUDENT;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> SHOW TABLES;
++-------------------+
+| Tables_in_COLLEGE |
++-------------------+
+| COURSE            |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> DROP TABLE COURSE;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> DROP DATABASE COLLEGE;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show database;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'database' at line 1
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.00 sec)
