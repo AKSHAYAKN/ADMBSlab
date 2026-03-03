@@ -1,0 +1,546 @@
+CREATE DATABASE EXP6;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> USE EXP6;
+Database changed
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE FindGreatest(
+    -> IN num1 INT,
+    -> IN num2 INT,
+    -> IN num3 INT
+    -> )
+    -> BEGIN
+    -> DECLARE greatest INT;
+    -> IF num1 >= num2 AND num1 >= num3 THEn
+    -> SET greatest = num1;
+    -> ELSEIF num2 >= num1 AND num2 >= num# THEN 
+    -> SET greatest = num2;
+    -> ELSE
+    -> SET greatest = num3;
+    -> END IF;
+    -> SELECT greatest AS Greatest_Number;
+    -> END//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SET greatest = num2;
+ELSE
+SET greatest = num3;
+END IF;
+SELECT greatest AS Greate' at line 11
+mysql> DELIMITER //
+mysql> 
+mysql> CREATE PROCEDURE FindGreatest(
+    ->     IN num1 INT,
+    ->     IN num2 INT,
+    ->     IN num3 INT
+    -> )
+    -> BEGIN
+    ->     DECLARE greatest INT;
+    -> 
+    ->     IF num1 >= num2 AND num1 >= num3 THEN
+    ->         SET greatest = num1;
+    ->     ELSEIF num2 >= num1 AND num2 >= num3 THEN
+    ->         SET greatest = num2;
+    ->     ELSE
+    ->         SET greatest = num3;
+    ->     END IF;
+    -> 
+    ->     SELECT greatest AS Greatest_Number;
+    -> END //
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> 
+mysql> DELIMITER ;
+mysql> CALL FindGreatest(20,45,30);
++-----------------+
+| Greatest_Number |
++-----------------+
+|              45 |
++-----------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE FindFactorial(
+    -> IN n INT
+    -> )
+    -> BEGIN 
+    -> DECLARE i INT DEFAULT 1;
+    -> DECLARE fact BEGINT DEFAULT 1;
+    -> WHERE i <= n DO
+    -> SET fact = fact * i;
+    -> SET i = i + 1;
+    -> END WHILE;
+    -> SELECt fact AS Factorial;
+    -> END//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'BEGINT DEFAULT 1;
+WHERE i <= n DO
+SET fact = fact * i;
+SET i = i + 1;
+END WHILE;' at line 6
+mysql> DELIMITER //
+mysql> 
+mysql> CREATE PROCEDURE FindFactorial(
+    ->     IN n INT
+    -> )
+    -> BEGIN
+    ->     DECLARE i INT DEFAULT 1;
+    ->     DECLARE fact BIGINT DEFAULT 1;
+    -> 
+    ->     WHILE i <= n DO
+    ->         SET fact = fact * i;
+    ->         SET i = i + 1;
+    ->     END WHILE;
+    -> 
+    ->     SELECT fact AS Factorial;
+    -> END //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> 
+mysql> DELIMITER ;
+mysql> CALL FindFactorial(5);
++-----------+
+| Factorial |
++-----------+
+|       120 |
++-----------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> DELIMITER//
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DELIMITER//' at line 1
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE GreadeProc(
+    -> IN mark INT)
+    -> IS BEGIN 
+    -> IF mark >= 90 THEN
+    -> DBMS_OUTPUT.PUT_LINE('Grade A');
+    -> ELSEIF mark>=80 Then
+    -> DBMS_OUTPUT.PUT_LINE('Grade B');
+    -> ELSEIF mark >= 70 THEN
+    -> DBMS_OUTPUT.PUT_LINE('Grade C');
+    -> ELSEIF mark >= 60 THEN
+    -> DBMS_OUTPUT.PUT_LINE('Grade d');
+    -> ELSE
+    -> DBMS_OUTPUT.PUT_LINE('Grade F');
+    -> END IF;
+    -> END;
+    -> DELIMITER ;
+    -> END //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IS BEGIN 
+IF mark >= 90 THEN
+DBMS_OUTPUT.PUT_LINE('Grade A');
+ELSEIF mark>=80 Th' at line 3
+mysql> DELIMITER //
+mysql> 
+mysql> CREATE PROCEDURE GradeProc(
+    ->     IN mark INT
+    -> )
+    -> BEGIN
+    ->     IF mark >= 90 THEN
+    ->         SELECT 'Grade A' AS Grade;
+    ->     ELSEIF mark >= 80 THEN
+    ->         SELECT 'Grade B' AS Grade;
+    ->     ELSEIF mark >= 70 THEN
+    ->         SELECT 'Grade C' AS Grade;
+    ->     ELSEIF mark >= 60 THEN
+    ->         SELECT 'Grade D' AS Grade;
+    ->     ELSE
+    ->         SELECT 'Grade F' AS Grade;
+    ->     END IF;
+    -> END //
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> 
+mysql> DELIMITER ;
+mysql> CALL GradeProc(85);
++---------+
+| Grade   |
++---------+
+| Grade B |
++---------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CALL GradeProc(60);
++---------+
+| Grade   |
++---------+
+| Grade D |
++---------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE ReverseNumber(
+    -> IN n INT
+    -> )
+    -> BEGIN
+    -> DECLARE rev INT DEFAULT 0;
+    -> DECLARE temp INT;
+    -> SET temp = nl
+    -> WHILE temp > 0 DO
+    -> SET rev = rev * 10 + MOD(temp, 10);
+    -> SET temp = FLOOR(temp / 10);
+    -> END WHILE;
+    -> SELECT rev AS Reversed_Number;
+    -> END //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHILE temp > 0 DO
+SET rev = rev * 10 + MOD(temp, 10);
+SET temp = FLOOR(temp / 10' at line 8
+mysql> DELIMITER //
+mysql> 
+mysql> CREATE PROCEDURE ReverseNumber(
+    ->     IN n INT
+    -> )
+    -> BEGIN
+    ->     DECLARE rev INT DEFAULT 0;
+    ->     DECLARE temp INT;
+    -> 
+    ->     SET temp = n;
+    -> 
+    ->     WHILE temp > 0 DO
+    ->         SET rev = rev * 10 + MOD(temp, 10);
+    ->         SET temp = FLOOR(temp / 10);
+    ->     END WHILE;
+    -> 
+    ->     SELECT rev AS Reversed_Number;
+    -> END //
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> 
+mysql> DELIMITER ;
+mysql> CALL ReverseNumber(3322);
++-----------------+
+| Reversed_Number |
++-----------------+
+|            2233 |
++-----------------+
+1 row in set (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CALL ReverseNumber(2222);
++-----------------+
+| Reversed_Number |
++-----------------+
+|            2222 |
++-----------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE SumOfSeries(
+    -> IN n INT
+    -> )
+    -> BEGIN 
+    -> DECLARE i INT DEFAULT 1;
+    -> DECLARE total INT DEFAULT 0;
+    -> IF n < 1 THEN
+    -> SELECT 'Enter a positive number' AS Message;
+    -> ELSE
+    -> WHILE i <= n DO
+    -> SET total = total + i;
+    -> SET i = i+1;
+    -> END WHILE;
+    -> SELECT total AS Sum_of_Series;
+    -> END IF;
+    -> END//
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> DELIMITER ;
+mysql> CALL SumOfSeries(6);
++---------------+
+| Sum_of_Series |
++---------------+
+|            21 |
++---------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CALL SumOfSeries(5);
++---------------+
+| Sum_of_Series |
++---------------+
+|            15 |
++---------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CALL SumOfSeries(3);
++---------------+
+| Sum_of_Series |
++---------------+
+|             6 |
++---------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CALL SumOfSeries(4);
++---------------+
+| Sum_of_Series |
++---------------+
+|            10 |
++---------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CREATE TABLE account(
+    -> account_id INT PRIMARY KEY,
+    -> balance INT);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> INSERT INTO account VALUES(100,10000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO account(101,4000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '101,4000)' at line 1
+mysql> INSERT INTO account VALUES(102,15000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO account VALUES(102,15000);
+ERROR 1062 (23000): Duplicate entry '102' for key 'account.PRIMARY'
+mysql> INSERT INTO account VALUES (101,4000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO account VALUES (102,15000);
+ERROR 1062 (23000): Duplicate entry '102' for key 'account.PRIMARY'
+mysql> INSERT INTO account VALUES (103,1000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO account VALUES (102,15000);
+ERROR 1062 (23000): Duplicate entry '102' for key 'account.PRIMARY'
+mysql> INSERT INTO account VALUES (105,15000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from acoount;'
+ERROR 1146 (42S02): Table 'EXP6.acoount' doesn't exist
+    '> select * from acoount;
+    '> ;
+    '> ;^C
+mysql> select * from account;
++------------+---------+
+| account_id | balance |
++------------+---------+
+|        100 |   10000 |
+|        101 |    4000 |
+|        102 |   15000 |
+|        103 |    1000 |
+|        105 |   15000 |
++------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE withdraw_amount(
+    -> IN acc_id INT,
+    -> In amt INT
+    -> )
+    -> BEGIN
+    -> DECLARE bal INT;
+    -> SELECT balance INTO bal
+    -> FROM account
+    -> WHERE account_id = acc_id;
+    -> IF bal IS NULL THEN 
+    -> SELECT bal - amt >= 1000 THEN
+    -> SELECT 'Account does not exist' AS Message;
+    -> ELSEIF bal -amt >= 1000 THEN
+    -> UPDATE account
+    -> SET balance = balance - amt
+    -> WHERE account_id = acc_id;
+    -> SELECT 'Withdrawal Successful' AS Message;
+    -> ELSE
+    -> SELECT 'Minimum balance should be 1000' AS Message;
+    -> END IF;
+    -> END //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'THEN
+SELECT 'Account does not exist' AS Message;
+ELSEIF bal -amt >= 1000 THEN
+UP' at line 11
+mysql> DELIMITER //
+mysql> 
+mysql> CREATE PROCEDURE withdraw_amount(
+    ->     IN acc_id INT,
+    ->     IN amt INT
+    -> )
+    -> BEGIN
+    ->     DECLARE bal INT;
+    -> 
+    ->     -- Get current balance
+    ->     SELECT balance INTO bal
+    ->     FROM account
+    ->     WHERE account_id = acc_id;
+    -> 
+    ->     -- Check if account exists
+    ->     IF bal IS NULL THEN
+    ->         SELECT 'Account does not exist' AS Message;
+    -> 
+    ->     -- Check minimum balance condition
+    ->     ELSEIF bal - amt >= 1000 THEN
+    ->         UPDATE account
+    ->         SET balance = balance - amt
+    ->         WHERE account_id = acc_id;
+    -> 
+    ->         SELECT 'Withdrawal Successful' AS Message;
+    -> 
+    ->     ELSE
+    ->         SELECT 'Minimum balance should be 1000' AS Message;
+    ->     END IF;
+    -> 
+    -> END //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> 
+mysql> DELIMITER ;
+mysql> CALL withdrawal_amount(100,500);
+ERROR 1305 (42000): PROCEDURE EXP6.withdrawal_amount does not exist
+mysql> CALL withdrawal_amount(100,500);
+ERROR 1305 (42000): PROCEDURE EXP6.withdrawal_amount does not exist
+mysql> CALL withdraw_amount(100,500);
++-----------------------+
+| Message               |
++-----------------------+
+| Withdrawal Successful |
++-----------------------+
+1 row in set (0.02 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CALL withdraw_amount(103,500);
++--------------------------------+
+| Message                        |
++--------------------------------+
+| Minimum balance should be 1000 |
++--------------------------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> DELIMITER //
+mysql> CREATE FUNCTION sum_of_digit(n INT)
+    -> RETURNS INT
+    -> DETERMINISTIC
+    -> BEGIN
+    -> DECLARE total INT DEFAULT 0;
+    -> DECLARE temp INT;
+    -> SET temp = n;
+    -> WHILE temp > 0 DO
+    -> SET total = total + MOD(temp,10);
+    -> SET temp = FLOOR(temp/10);
+    -> END WHILE;
+    -> RETURNT total;
+    -> END //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'total;
+END' at line 12
+mysql> DELIMITER //
+mysql> 
+mysql> CREATE FUNCTION sum_of_digits(n INT)
+    -> RETURNS INT
+    -> DETERMINISTIC
+    -> BEGIN
+    ->     DECLARE total INT DEFAULT 0;
+    ->     DECLARE temp INT;
+    -> 
+    ->     SET temp = n;
+    -> 
+    ->     WHILE temp > 0 DO
+    ->         SET total = total + MOD(temp,10);
+    ->         SET temp = FLOOR(temp/10);
+    ->     END WHILE;
+    -> 
+    ->     RETURN total;
+    -> END //
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> 
+mysql> DELIMITER ;
+mysql> SELECT sum_of_digits(1234) AS Sum_of_Digits;
++---------------+
+| Sum_of_Digits |
++---------------+
+|            10 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT sum_of_digits(123456) AS Sum_of_Digits;
++---------------+
+| Sum_of_Digits |
++---------------+
+|            21 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> CREATE TABLE employee(
+    -> emp_id INT PRIMARY KEY,
+    -> salary DECIMAL(10,2)
+    -> );
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> DELIMITER //
+mysql> CREATE FUNCTION get_salary(id INT)
+    -> RETURNS DECIMAL(10,2)
+    -> DETERMINISTIC
+    -> READS SQL DATA
+    -> BEGIN
+    -> DECLARE sal DECIMAL(10,2);
+    -> SELECT salary INTO sal
+    -> FROM employee
+    -> WHERE emp_id = id;
+    -> RETURN sal;
+    -> END //
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> DELIMITER ;
+mysql> SELECT get_salary(101);
++-----------------+
+| get_salary(101) |
++-----------------+
+|            NULL |
++-----------------+
+1 row in set (0.01 sec)
+
+mysql> INSERT INTO employee VALUES(100,120000);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO employee VALUES(101,20000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO employee VALUES(104,30000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO employee VALUES(102,60000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO employee VALUES(103,50000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from employee;
++--------+-----------+
+| emp_id | salary    |
++--------+-----------+
+|    100 | 120000.00 |
+|    101 |  20000.00 |
+|    102 |  60000.00 |
+|    103 |  50000.00 |
+|    104 |  30000.00 |
++--------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT get_salary(101);
++-----------------+
+| get_salary(101) |
++-----------------+
+|        20000.00 |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> 
+
+
